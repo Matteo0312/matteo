@@ -1,6 +1,8 @@
-// The portfolio is deployed as a static GitHub Pages site. This ambient
-// declaration keeps the optional Cloudflare database helper type-checkable
-// without requiring the Cloudflare runtime module during the static build.
-declare module "cloudflare:workers" {
-  export const env: any;
+// The portfolio is deployed as a static GitHub Pages site, so the optional
+// Cloudflare D1 binding may be absent. Augment Cloudflare's project-specific
+// environment type so database helpers can check for the binding safely.
+declare namespace Cloudflare {
+  interface Env {
+    DB?: D1Database;
+  }
 }
