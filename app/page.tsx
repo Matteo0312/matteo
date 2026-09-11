@@ -2,6 +2,13 @@
 
 import { useEffect, useState } from "react";
 
+type ProjectMedia = {
+  type: "image" | "video";
+  src: string;
+  alt: string;
+  caption: string;
+};
+
 type Project = {
   number: string;
   icon: "drone" | "arm" | "hand" | "system";
@@ -13,6 +20,7 @@ type Project = {
   contribution: string;
   outcome: string;
   tools: string[];
+  media?: ProjectMedia[];
 };
 
 const projects: Project[] = [
@@ -31,6 +39,14 @@ const projects: Project[] = [
     outcome:
       "The current pipeline achieves closed-loop flight using estimated state and provides a structured route toward sample-efficient perception-aware learning and sim-to-real validation.",
     tools: ["Python", "C++", "ROS", "SVO", "MPC", "RL", "acados", "Habitat-Sim"],
+    media: [
+      {
+        type: "image",
+        src: "./projects/rollout_leapc_svo_color.gif",
+        alt: "Perception-aware drone navigation rollout with trajectory and SVO feature visualization",
+        caption: "Learned SAC-ZOP LEAP-C MPC rollout using ground-truth state and SVO features",
+      },
+    ],
   },
   {
     number: "02",
@@ -47,6 +63,14 @@ const projects: Project[] = [
     outcome:
       "The project connected policy learning, force control and sim-to-real deployment in a full robotics workflow.",
     tools: ["Python", "Reinforcement Learning", "Simulation", "Robot Control", "Sim-to-Real"],
+    media: [
+      {
+        type: "video",
+        src: "./projects/Force_Cut.mp4",
+        alt: "ALMA mobile manipulator demonstrating learned force control",
+        caption: "Force-control policy demonstration on the ALMA mobile manipulator",
+      },
+    ],
   },
   {
     number: "03",
@@ -63,6 +87,20 @@ const projects: Project[] = [
     outcome:
       "A functional end-to-end prototype combining rapid hardware iteration with data-driven control.",
     tools: ["CAD", "Rapid Prototyping", "Python", "Imitation Learning", "Mechatronics"],
+    media: [
+      {
+        type: "image",
+        src: "./projects/IMG-20250112-WA0000.jpg",
+        alt: "Dexterous robotic hand prototype reproducing human grasps",
+        caption: "The hand prototype reproducing several dexterous grasp configurations",
+      },
+      {
+        type: "video",
+        src: "./projects/Movement_Of_FInger.mp4",
+        alt: "Dexterous robotic hand moving an individual finger",
+        caption: "Individual finger movement during prototype testing",
+      },
+    ],
   },
   {
     number: "04",
@@ -298,10 +336,25 @@ export default function Home() {
               <h2 id="project-modal-title">{selectedProject.title}</h2>
               <p className="modal-summary">{selectedProject.summary}</p>
             </div>
-            <div className="modal-media">
-              <span>Project media</span>
-              <strong>Photos &amp; videos coming next</strong>
-              <p>This area is ready for your project footage, diagrams and results.</p>
+            <div className={selectedProject.media?.length ? "modal-media has-media" : "modal-media"}>
+              {selectedProject.media?.length ? (
+                selectedProject.media.map((item) => (
+                  <figure className="media-item" key={item.src}>
+                    {item.type === "video" ? (
+                      <video src={item.src} aria-label={item.alt} controls autoPlay muted loop playsInline preload="metadata" />
+                    ) : (
+                      <img src={item.src} alt={item.alt} loading="lazy" />
+                    )}
+                    <figcaption>{item.caption}</figcaption>
+                  </figure>
+                ))
+              ) : (
+                <>
+                  <span>Project media</span>
+                  <strong>Photos &amp; videos coming next</strong>
+                  <p>This area is ready for your project footage, diagrams and results.</p>
+                </>
+              )}
             </div>
             <div className="modal-details">
               <div><span>Challenge</span><p>{selectedProject.challenge}</p></div>
