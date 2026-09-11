@@ -183,7 +183,7 @@ export default function Home() {
           </p>
           <div className="hero-actions">
             <a className="button button-primary" href="#projects">Explore projects <span>↗</span></a>
-            <a className="resume-link" href="/assets/matteo-stuerm-cv.pdf" target="_blank" rel="noreferrer">
+            <a className="resume-link" href="./assets/matteo-stuerm-cv.pdf" target="_blank" rel="noreferrer">
               View résumé <span>→</span>
             </a>
           </div>
@@ -193,7 +193,7 @@ export default function Home() {
           <div className="trajectory" aria-hidden="true">
             <span className="orbit orbit-one" /><span className="orbit orbit-two" />
           </div>
-          <img src="/assets/matteo-stuerm.jpg" alt="Portrait of Matteo Stürm" width="1920" height="1280" />
+          <img src="./assets/matteo-stuerm.jpg" alt="Portrait of Matteo Stürm" width="1920" height="1280" />
           <span className="crosshair" aria-hidden="true" />
         </div>
       </section>
@@ -280,7 +280,7 @@ export default function Home() {
         <div className="contact-actions">
           <a className="button button-light" href="mailto:matteo.stuerm@gmail.com">Send an email <span>↗</span></a>
           <a href="https://www.linkedin.com/in/matteo-stuerm/" target="_blank" rel="noreferrer">LinkedIn ↗</a>
-          <a href="/assets/matteo-stuerm-cv.pdf" target="_blank" rel="noreferrer">Résumé ↗</a>
+          <a href="./assets/matteo-stuerm-cv.pdf" target="_blank" rel="noreferrer">Résumé ↗</a>
         </div>
         <footer><span>Matteo Stürm · Zürich, Switzerland</span><span>Robotics · Control · Learning</span></footer>
       </section>
